@@ -1441,7 +1441,7 @@ class MiniEdit( Frame ):
         if f is None:
             return
         self.newTopology()
-        loadedTopology = self.convertJsonUnicode(json.load(f))
+        loadedTopology = json.load(f) # self.convertJsonUnicode() not nessesary - causes bug
 
         # Load application preferences
         if 'application' in loadedTopology:
@@ -2016,7 +2016,7 @@ class MiniEdit( Frame ):
 
             f.write("\n")
             f.write("    CLI(net)\n")
-            for widget, item in self.widgetToItem:
+            for widget, item in self.widgetToItem.items():
                 name = widget[ 'text' ]
                 tags = self.canvas.gettags( item )
                 if 'Host' in tags:
